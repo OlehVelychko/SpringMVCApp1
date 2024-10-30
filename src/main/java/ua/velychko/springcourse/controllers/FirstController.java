@@ -34,24 +34,13 @@ public class FirstController {
                              @RequestParam("b") int b,
                              @RequestParam("action") String action,
                              Model model) {
-        double result = 0;
-
-        switch (action) {
-            case "addition":
-                result = a + b;
-                break;
-            case "subtraction":
-                result = a - b;
-                break;
-            case "multiplication":
-                result = a * b;
-                break;
-            case "division":
-                result = (double) a / b;
-                break;
-            default:
-                break;
-        }
+        double result = switch (action) {
+            case "addition" -> a + b;
+            case "subtraction" -> a - b;
+            case "multiplication" -> a * b;
+            case "division" -> (double) a / b;
+            default -> 0;
+        };
 
         model.addAttribute("result", result);
         return "first/calculator";
